@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     public Text scoreTextPesonal, personalText;
     public GameObject winImage, loseImage;
 
+
     public void nextScene(string name) => SceneManager.LoadScene(name);
 
     public void ScoreVisual(int score)
@@ -64,24 +65,27 @@ public class UIController : MonoBehaviour
     {
         panelGameOver.active = true;
         scoreTextPesonal.text = scores.ToString();
-        if (lolos)
-        {
-            personalText.text = textLolos;
-            winImage.active = true;
-            loseImage.active = false;
-        }
-        else
-        {
-            personalText.text = textGagal;
-            winImage.active = false;
-            loseImage.active = true;
-        }
+        
         if(scores < 20)
         {
             personalText.text = "Play Again \n Get Score More than 20";
             
             winImage.active = false;
             loseImage.active = true;
+            
+        }else if (lolos)
+        {
+            personalText.text = textLolos;
+            winImage.active = true;
+            loseImage.active = false;
+            AudioManager.audioManager.PlayBGMwin();
+        }
+        else
+        {
+            personalText.text = textGagal;
+            winImage.active = false;
+            loseImage.active = true;
+            AudioManager.audioManager.PlayBGMLose();
         }
     }
 

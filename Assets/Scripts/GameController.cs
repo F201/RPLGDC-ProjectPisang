@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         audioManager.SetActiveBGM(false);
-        audioManager.PlayFailedBGM();
+        audioManager.PlayBGMScore();
         isGameOver = true;
         uIController.WinLoseCondition(_score, lolos);
         StartCoroutine(_dataCenter.PostHighScore(_nim,_score));

@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+
+    public static AudioManager audioManager;
+
     [SerializeField]
-    private AudioSource bgm, select, jump,bgmFail;
+    private AudioSource bgm, select, jump,bgmFail, bgmScore, bgmWin, bgmLolos;
+
+    private void Start()
+    {
+        if(audioManager == null)
+        {
+            audioManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void JumpSound()
     {
@@ -25,5 +41,20 @@ public class AudioManager : MonoBehaviour
     public void PlayFailedBGM()
     {
         bgmFail.Play();
+    }
+
+    public void PlayBGMScore()
+    {
+        bgmScore.Play();
+    }
+
+    public void PlayBGMwin()
+    {
+        bgmScore.Play();
+    }
+
+    public void PlayBGMLose()
+    {
+        bgmScore.Play();
     }
 }

@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager audioManager;
 
     [SerializeField]
-    private AudioSource bgm, select, jump,bgmFail, bgmScore, bgmWin, bgmLolos;
+    private AudioSource bgm, select, jump,bgmFail, bgmScore, bgmWin, bgmLose;
 
     private void Start()
     {
@@ -48,13 +48,21 @@ public class AudioManager : MonoBehaviour
         bgmScore.Play();
     }
 
-    public void PlayBGMwin()
+    public void PlayBGMCheck()
     {
-        bgmScore.Play();
-    }
-
-    public void PlayBGMLose()
-    {
-        bgmScore.Play();
+        bgmScore.Stop();
+        if (!GameController.instance.uIController.soundCheck)
+        {
+            return;
+        }
+        if (GameController.instance.lolos)
+        {
+            bgmWin.Play();
+        }
+        else
+        {
+            bgmLose.Play();
+        }
+        
     }
 }

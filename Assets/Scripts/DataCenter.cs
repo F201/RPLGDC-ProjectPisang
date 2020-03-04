@@ -7,7 +7,9 @@ using System.Collections;
 
 public class DataCenter : MonoBehaviour
 {
-    //public static string location = Application.dataPath + "/saveFile.json";
+
+    private string urlPublish = "https://rplgdc-dashboard-api.herokuapp.com";
+    private string urlDevelopment = "https://rplgdc-dashboard.herokuapp.com";
 
     public string urlGetScore;
     public string urlPostScore;
@@ -33,25 +35,6 @@ public class DataCenter : MonoBehaviour
         public string data, msg;
     }
 
-    //public List<HighScore> LoadHighScore()
-    //{
-    //    if (!File.Exists(location))
-    //    {
-    //        List<HighScore> hg = new List<HighScore>();
-    //        string jsonDummy = JsonHelper.ToJson(hg,true);
-    //        File.WriteAllText(location, jsonDummy);
-    //    }
-    //    string json = File.ReadAllText(location);
-    //    List<HighScore> scores = JsonHelper.FromJson<HighScore>(json);
-    //    return scores;
-    //}
-
-    //public void SaveHighScore(List<HighScore> scores)
-    //{
-    //    string json = JsonHelper.ToJson<HighScore>(scores, true);
-    //    File.WriteAllText(location, json);
-    //}
-
     private static int Comperator(HighScore x, HighScore y)
     {
         return y.score - x.score;
@@ -68,22 +51,15 @@ public class DataCenter : MonoBehaviour
         formDate.AddField("nim", nim);
         formDate.AddField("score", score.ToString());
 
-        post = UnityWebRequest.Post(urlPostScore, formDate);
+        post = UnityWebRequest.Post(urlPublish+urlPostScore, formDate);
         yield return post.SendWebRequest();
 
-        if (post.isNetworkError || post.isHttpError)
-        {
-            Debug.Log(post.error);
-        }
-        else
-        {
-            Debug.Log(post.downloadHandler.text);
-        }
+        //Debug.Log(post.downloadHandler.text);
     }
 
     public IEnumerator GetHighScore()
     {
-        UnityWebRequest www = UnityWebRequest.Get(urlGetScore);
+        UnityWebRequest www = UnityWebRequest.Get(urlPublish+urlGetScore);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -93,13 +69,14 @@ public class DataCenter : MonoBehaviour
         else
         {
             string json = www.downloadHandler.text;
+            //Debug.Log(json);
             listScore = JsonHelper.FromJson<HighScore>(json);
         }
     }
 
     public IEnumerator GetLolos(string nim)
     {
-        UnityWebRequest www = UnityWebRequest.Get(urlGetLolos+nim);
+        UnityWebRequest www = UnityWebRequest.Get(urlPublish+urlGetLolos+nim);
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -118,6 +95,7 @@ public class DataCenter : MonoBehaviour
             {
                 GameController.instance.lolos = false;
             }
+            //Debug.Log(json);
         }
     }
 }

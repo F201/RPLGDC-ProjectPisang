@@ -2281,7 +2281,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Congratulations! \nYou've passed the interview session!\n\nFirstMeet Internship
     Member RPLGDC Friday March 13 2020, 07.00-09.00 PM\n\nPlease join our Discord
-    Group AS SOON AS POSSIBLE\r\nbit.ly/RPLGDC2020"
+    Group AS SOON AS POSSIBLE\r\nbit.ly/RPLGDC_2020"
 --- !u!222 &1009120569
 CanvasRenderer:
   m_ObjectHideFlags: 0
